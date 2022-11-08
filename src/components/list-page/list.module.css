@@ -1,0 +1,46 @@
+.formRow {
+    display: flex;
+    max-width: 952px;
+    margin: 0 auto;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+.formRow:first-of-type {
+    padding-bottom: 12px;
+}
+
+.input {
+    max-width: 204px;
+}
+
+.button {
+    flex-grow: 1;
+}
+
+.listContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 90px;
+    gap: 16px;
+}
+
+.listElement {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+}
+
+.add {
+    position: absolute;
+    top: -65px;
+    left: 13px;
+}
+
+.remove {
+    position: absolute;
+    bottom: -90px;
+    left: 10px;
+}

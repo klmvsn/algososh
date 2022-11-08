@@ -1,0 +1,25 @@
+.handles {
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 980px;
+}
+
+.radio {
+    display: flex;
+    gap: 44px;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.column {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 48px;
+}
