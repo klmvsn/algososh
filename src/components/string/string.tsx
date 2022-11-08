@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { ElementStates } from "../../types/element-states";
+import { ChangeHandler } from "../../types/handler";
 import { TArray } from "../../types/string";
 import { delay } from "../../utils/delay";
 import { Button } from "../ui/button/button";
@@ -15,26 +16,26 @@ export const StringComponent: React.FC = () => {
   const [inProgress, setInProgress] = useState(false);
   const [step, setStep] = useState(-1);
 
-  const swapString = async() => {
-    if(step < 0)
+  const swapString = async () => {
+    if (step < 0)
       return;
-    if(step >= arrayOfChars.length / 2){
+    if (step >= arrayOfChars.length / 2) {
       setInProgress(false);
       return;
     }
-    setArrayOfChars(await swap(arrayOfChars,step,delay));
-    setStep(step+1);
+    setArrayOfChars(await swap(arrayOfChars, step, delay));
+    setStep(step + 1);
   }
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange: ChangeHandler = (e) => {
     setInput(e.target.value);
   }
 
   const handleClick = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const chars:TArray[] = [];
-    input.split('').forEach((item,index) => {
-      chars.push({item: item, state: index === 0 || index === input.length - 1 ? ElementStates.Changing : ElementStates.Default});
+    const chars: TArray[] = [];
+    input.split('').forEach((item, index) => {
+      chars.push({ item: item, state: index === 0 || index === input.length - 1 ? ElementStates.Changing : ElementStates.Default });
     })
 
     setArrayOfChars([...chars]);
@@ -45,7 +46,7 @@ export const StringComponent: React.FC = () => {
 
   useEffect(() => {
     swapString();
-  },[step])
+  }, [step])
 
   return (
     <SolutionLayout title="Строка">
@@ -54,7 +55,7 @@ export const StringComponent: React.FC = () => {
         <Button text={'Развернуть'} type={'submit'} disabled={!input} isLoader={inProgress} />
       </form>
       <ul className={styles.list}>
-        {arrayOfChars.map((char,index) => {
+        {arrayOfChars.map((char, index) => {
           return <Circle letter={char.item} state={char.state} key={index} />
         })}
       </ul>

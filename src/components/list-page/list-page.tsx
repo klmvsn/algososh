@@ -2,6 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { MAXLENGTH } from "../../constants/length";
 import { ElementStates } from "../../types/element-states";
+import { ChangeHandler } from "../../types/handler";
 import { TListInProgress, TListItem } from "../../types/list";
 import { delay } from "../../utils/delay";
 import { Button } from "../ui/button/button";
@@ -10,7 +11,7 @@ import { ArrowIcon } from "../ui/icons/arrow-icon";
 import { Input } from "../ui/input/input";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import styles from './list.module.css'
-import { basicArray, LinkedList, listArray} from "./utils";
+import { basicArray, LinkedList, listArray } from "./utils";
 
 export const ListPage: React.FC = () => {
 
@@ -29,11 +30,11 @@ export const ListPage: React.FC = () => {
     deleteByIndex: false
   })
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange: ChangeHandler = (e) => {
     setInput(e.target.value);
   }
 
-  const handleChangeInputIndex = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInputIndex: ChangeHandler = (e) => {
     setInputIndex(e.target.value);
   }
 
@@ -251,7 +252,7 @@ export const ListPage: React.FC = () => {
           disabled={disabled || listArray.length <= 1}
         />
       </form>
-      <form className={styles.formRow}>
+      <form className={styles.formRow} onSubmit={e => e.preventDefault()}>
         <Input
           extraClass={styles.input}
           type={'number'}
@@ -271,7 +272,7 @@ export const ListPage: React.FC = () => {
           text={'Удалить по индексу'}
           onClick={handleDeleteByIndex}
           isLoader={inProgress.deleteByIndex}
-          disabled={disabled || parseInt(inputIndex) > listArray.length - 1 || parseInt(inputIndex) < 0}
+          disabled={disabled || !input || parseInt(inputIndex) > listArray.length - 1 || parseInt(inputIndex) < 0}
         />
       </form>
       <ul className={styles.listContainer} >

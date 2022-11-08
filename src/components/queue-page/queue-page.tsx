@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { ElementStates } from "../../types/element-states";
+import { ChangeHandler } from "../../types/handler";
 import { TInProgress, TQueue } from "../../types/queue";
 import { delay } from "../../utils/delay";
 import { Button } from "../ui/button/button";
@@ -22,7 +23,7 @@ export const QueuePage: React.FC = () => {
   const [inProgress, setInProgress] = useState<TInProgress>({ add: false, remove: false });
   const [result, setResult] = useState<(TQueue | null)[]>([])
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange: ChangeHandler = (e) => {
     setInput(e.target.value);
   }
 
@@ -52,7 +53,7 @@ export const QueuePage: React.FC = () => {
     await getAnimation(tempQueue);
     tempQueue.dequeue();
     getAnimation(tempQueue);
-    if(queue.isEmpty()) clear();
+    if (queue.isEmpty()) clear();
     setInProgress({ ...inProgress, remove: false })
   }
 
@@ -67,13 +68,13 @@ export const QueuePage: React.FC = () => {
 
   return (
     <SolutionLayout title="Очередь">
-      <form className={styles.form} >
+      <form className={styles.form} onSubmit={e => e.preventDefault()}>
         <div className={styles.inputContainer}>
           <Input type={'text'} maxLength={4} isLimitText={true} value={input} onChange={handleChange} />
-          <Button text={'Добавить'} onClick={enqueue} isLoader={inProgress.add} disabled={!input || queue.isFull()}/>
-          <Button text={'Удалить'} onClick={dequeue} isLoader={inProgress.remove} disabled={queue.isEmpty()}/>
+          <Button text={'Добавить'} onClick={enqueue} isLoader={inProgress.add} disabled={!input || queue.isFull()} />
+          <Button text={'Удалить'} onClick={dequeue} isLoader={inProgress.remove} disabled={queue.isEmpty()} />
         </div>
-        <Button text={'Очистить'} onClick={clear} disabled={queue.isEmpty()}/>
+        <Button text={'Очистить'} onClick={clear} disabled={queue.isEmpty()} />
       </form>
       <ul className={styles.list}>
         {result.map((item, index) => {
