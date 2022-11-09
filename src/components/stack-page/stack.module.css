@@ -1,0 +1,19 @@
+.form {
+    display: flex;
+    margin: 0 auto;
+    max-width: 839px;
+    justify-content: space-between;
+}
+
+.inputContainer {
+    display: flex;
+    gap: 12px;
+    flex-basis: 630px;
+}
+
+.list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 52px;
+}

@@ -1,0 +1,14 @@
+.layout {
+    display: flex;
+    margin: 0 auto;
+    max-width: 522px;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding: 120px 0 0 0;
+    gap: 48px 16px;
+    max-width: 950px;
+}
