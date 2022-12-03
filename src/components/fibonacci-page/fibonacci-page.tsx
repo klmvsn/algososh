@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { ChangeHandler } from "../../types/handler";
 import { delay } from "../../utils/delay";
