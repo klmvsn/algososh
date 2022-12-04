@@ -3,7 +3,7 @@ import {DELAY_IN_MS} from '../../src/constants/delays'
 
 describe('String test', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/recursion')
+    cy.visit('recursion')
   })
 
   it('При пустом инпуте кнопка недоступна', () => {

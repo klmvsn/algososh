@@ -10,7 +10,7 @@ describe('test stack', () => {
   }
 
   beforeEach(() => {
-    cy.visit('http://localhost:3000/stack')
+    cy.visit('stack')
   })
 
   it('При пустом инпуте кнопка недоступна', () => {

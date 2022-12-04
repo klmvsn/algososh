@@ -10,7 +10,7 @@ describe('test queue', () => {
   }
 
   beforeEach(() => {
-    cy.visit('http://localhost:3000/queue')
+    cy.visit('queue')
   })
 
   it('При пустом инпуте кнопка недоступна', () => {

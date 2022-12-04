@@ -4,7 +4,7 @@ import { SHORT_DELAY_IN_MS } from '../../src/constants/delays';
 describe('test list', () => {
 
   beforeEach(() => {
-    cy.visit('http://localhost:3000/list')
+    cy.visit('list')
   })
 
   it('При пустом инпуте кнопка недоступна', () => {

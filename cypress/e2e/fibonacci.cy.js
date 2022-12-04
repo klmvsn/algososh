@@ -3,7 +3,7 @@ import { circles } from "../constants/constants";
 
 describe('fibonacci test', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/fibonacci')
+    cy.visit('fibonacci')
   })
 
   it('При пустом инпуте кнопка недоступна', () => {
