@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { MAXLENGTH } from "../../constants/length";
 import { ElementStates } from "../../types/element-states";
@@ -272,7 +272,7 @@ export const ListPage: React.FC = () => {
           text={'Удалить по индексу'}
           onClick={handleDeleteByIndex}
           isLoader={inProgress.deleteByIndex}
-          disabled={disabled || !input || parseInt(inputIndex) > listArray.length - 1 || parseInt(inputIndex) < 0}
+          disabled={disabled || !inputIndex || parseInt(inputIndex) > listArray.length - 1 || parseInt(inputIndex) < 0}
         />
       </form>
       <ul className={styles.listContainer} >

@@ -1,27 +1,32 @@
+import { Dispatch, SetStateAction } from "react";
 import { DELAY_IN_MS } from "../../constants/delays";
 import { ElementStates } from "../../types/element-states";
 import { TArray } from "../../types/string";
+import { delay } from "../../utils/delay";
 
-export const swap = async (array:TArray[],step:number,delay: (ms: number) => Promise<null>) => {
-    if (array.length === 1){
-      array[0].state = ElementStates.Modified;
+const swap = <T>(array: T[], fistElement: number, secondElement: number) => {
+  const temp = array[fistElement];
+  array[fistElement] = array[secondElement];
+  array[secondElement] = temp;
+};
+
+export const reverseString = async (array: TArray[], setState: Dispatch<SetStateAction<TArray[]>>) => {
+  for (let i = 0; i < Math.ceil(array.length / 2); i++) {
+    const firstElement = i;
+    const secondElement = array.length - i - 1;
+    if (firstElement < secondElement) {
+      array[firstElement].state = ElementStates.Changing;
+      array[secondElement].state = ElementStates.Changing;
+      setState([...array]);
+      await delay(DELAY_IN_MS);
+      swap(array, firstElement, secondElement);
+      array[firstElement].state = ElementStates.Modified;
+      array[secondElement].state = ElementStates.Modified;
+      setState([...array]);
+    } else {
+      array[firstElement].state = ElementStates.Modified;
+      setState([...array]);
     }
-  
-    let temp = array[step];
-    array[step] = array[array.length - step - 1];
-    array[array.length - step - 1] = temp;
-  
-    array[step].state = ElementStates.Modified;
-    array[array.length - step - 1].state = ElementStates.Modified;
-  
-    if (step + 1 < array.length - step - 2) {
-      array[step + 1].state = ElementStates.Changing;
-      array[array.length - step - 2].state = ElementStates.Changing;
-    }
-  
-    if (step + 1 === array.length - step - 2) 
-      array[step + 1].state = ElementStates.Modified;
-  
-    await delay(DELAY_IN_MS);
-    return array;
   }
+  await delay(DELAY_IN_MS);
+}
